@@ -1,114 +1,68 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Model.py                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ebennace <ebennace@student.42lausanne.c    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/11/10 08:56:25 by ebennace          #+#    #+#              #
+#    Updated: 2022/11/10 20:11:10 by ebennace         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+# =============== Import =================== #
 import tensorflow as tf
-from image import processing_image
 import numpy as np
 
-# def gram_matrix(input_tensor):
-#     channels = int(input_tensor.shape[-1])
-#     a = tf.reshape(input_tensor, [-1, channels])
-#     n = tf.shape(a)[0]
-#     gram = tf.matmul(a, a, transpose_a=True)
-#     return gram / tf.cast(n, tf.float32)
+from tensorflow.keras.applications import VGG19
+from keras import Model
+from tensorflow import Tensor
 
-def gram_matrix(input_tensor):
-  result = tf.linalg.einsum('bijc,bijd->bcd', input_tensor, input_tensor)
-  input_shape = tf.shape(input_tensor)
-  num_locations = tf.cast(input_shape[1]*input_shape[2], tf.float32)
-  return result/(num_locations)
+from processing import preprocessing_img
+# ======================================== #
 
-def features_maps_extractor(layer_names):
+def load_vgg19():
+    vgg = VGG19(include_top=False, weights='imagenet')
+    return vgg
 
-    vgg = tf.keras.applications.VGG19(include_top=False, weights='imagenet')
-    vgg.trainable = False
+# ======================================== #
 
-    outputs = [vgg.get_layer(name).output for name in layer_names]
+def create_list_of_vgg_layer():
 
-    model = tf.keras.Model([vgg.input], outputs)
+    content_layer_name  = ['block5_conv2']
 
-    return model
+    style_layer_names   = ['block1_conv1',
+                           'block2_conv1',
+                           'block3_conv1',
+                           'block4_conv1',
+                           'block5_conv1']
 
-class StyleContentModel(tf.keras.models.Model):
+    return (content_layer_name, style_layer_names)
 
-    def __init__(self, style_layers, content_layers):
-        super().__init__()
-        self.vgg = features_maps_extractor(style_layers + content_layers)
-        self.style_layers = style_layers
-        self.content_layers = content_layers
-        self.num_style_layers = len(style_layers)
-        self.vgg.trainable = False
+# ======================================== #
 
-    def call(self, inputs):
-        "Expects float input in [0,1]"
-        inputs = inputs * 255.0
-        preprocessed_input = tf.keras.applications.vgg19.preprocess_input(inputs)
+def create_multi_output_model(style_layers, content_layers):
 
-        outputs = self.vgg(preprocessed_input)
+    vgg19 = load_vgg19()
+    
+    layers_name = style_layers + content_layers
+    layers_output = list()
+    
+    for name in layers_name:
+        layer = vgg19.get_layer(name)
+        output = layer.output
+        layers_output.append(output)
 
-        style_outputs, content_outputs = (outputs[:self.num_style_layers],
-                                          outputs[self.num_style_layers:])
+    multi_output_model = Model([vgg19.input], layers_output)
+    multi_output_model.trainable = False
 
-        style_outputs = [gram_matrix(style_output) for style_output in style_outputs]
+    return (multi_output_model)
 
-        content_dict = {content_name: value for content_name, value in
-                        zip(self.content_layers, content_outputs)}
+# ======================================== #
 
-        style_dict = {style_name: value for style_name, value in
-                      zip(self.style_layers, style_outputs)}
+def get_features_map(model, img):
 
-        return {'content': content_dict, 'style': style_dict}
+        process_img = preprocessing_img(img)
+        features_map = model(process_img)
 
-
-
-class Content_Extractor(tf.keras.models.Model):
-
-  def __init__(self, content_layers):
-
-    super().__init__()
-    init_layer = ['block1_conv1']
-    self.vgg = features_maps_extractor(init_layer + content_layers)
-    self.vgg.trainable = False
-    self.content_layers = content_layers
-    self.num_style_layers = len(init_layer)
-
-  def call(self, inputs):
-
-    inputs = inputs * 255.0
-    preprocessed_input = tf.keras.applications.vgg19.preprocess_input(inputs)
-    outputs = self.vgg(preprocessed_input)
-    content_outputs = outputs[self.num_style_layers:]
-
-    content_dict = {content_name: value
-                    for content_name, value
-                    in zip(self.content_layers, content_outputs)}
-
-    return content_dict
-
-def update_shape_in_dict(content_dict):
-
-    for name, output in content_dict.items():
-        nbr_shape = len(output.shape.as_list())
-        if (nbr_shape == 3):
-            output = output[tf.newaxis, :]
-            content_dict[name] = output
-    return content_dict
-
-class Style_Extractor(tf.keras.models.Model):
-
-    def __init__(self, style_layers):
-        super().__init__()
-        self.extractor = features_maps_extractor(style_layers)
-        self.style_layers = style_layers
-        self.num_style_layers = len(style_layers)
-        self.extractor.trainable = False
-
-
-    def call(self, inputs):
-
-        preprocessed_input = processing_image(inputs)
-
-        style_outputs = self.extractor(preprocessed_input)
-
-        style_outputs = [gram_matrix(style) for style in style_outputs]
-
-        style_dict = {style_name: value for style_name, value in zip(self.style_layers, style_outputs)}
-
-        return style_dict
+        return (features_map)

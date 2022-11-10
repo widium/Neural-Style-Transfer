@@ -1,49 +1,58 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    loss.py                                            :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ebennace <ebennace@student.42lausanne.c    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/11/10 09:09:12 by ebennace          #+#    #+#              #
+#    Updated: 2022/11/10 19:39:26 by ebennace         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+# =============== Import =================== #
 import tensorflow as tf
 
-def compute_content_loss(content_generated : dict, content_target : dict, Weight : float, num_style_layers : int):
+from tensorflow import Tensor, Variable
+# ======================================== #
 
-    loss = 0
-    for name in content_generated.keys():
+def compute_content_loss(content_generated, 
+                         content_target):
+    
+    content_loss = tf.reduce_mean((content_generated - content_target)**2)
+    return (content_loss)
 
-         Generated = content_generated[name]
-         Content = content_target[name]
-         loss = tf.reduce_mean((Generated - Content) ** 2)
+# ======================================== #
 
-    loss *= (Weight / num_style_layers)
+def compute_style_loss(style_generated, 
+                       style_target):
 
-    return (loss)
+    all_style_loss = list()
 
-#%%
-def compute_style_loss(style_generated : dict, style_target : dict, Weight : float, num_style_layers : int):
+    for generated, target in zip(style_generated, style_target):
 
-    loss = 0
-    for name in style_generated.keys():
+        style_layer_loss = tf.reduce_mean((generated - target)**2)
+        all_style_loss.append(style_layer_loss)
 
-        Gram_generated = style_generated[name]
-        Gram_style = style_target[name]
-        loss = tf.reduce_mean((Gram_generated - Gram_style)**2)
+    num_style_layers = len(all_style_loss)
+    style_loss = tf.add_n(all_style_loss) / num_style_layers
 
-    loss *= (Weight / num_style_layers)
-    return (loss)
+    return (style_loss)
 
-#%%
-def compute_total_loss(content_generated : dict,
-               content_target : dict,
-               style_generated : dict,
-               style_target : dict,
-               Weight_content : float,
-               Weight_style : float,
-               num_style_layers : int):
+# ======================================== #
 
-    content_loss = tf.add_n([compute_content_loss(content_generated,
-                                content_target,
-                                Weight_content,
-                                num_style_layers)])
+def compute_total_loss(style_generated,
+                       content_generated,
+                       style_target,
+                       content_target,
+                       style_weight,
+                       content_weight):
 
-    style_loss = tf.add_n([compute_style_loss(style_generated,
-                            style_target, Weight_style,
-                            num_style_layers)])
+        content_loss = compute_content_loss(content_generated, content_target)
+        style_loss = compute_style_loss(style_generated, style_target)
 
-    total_loss = style_loss + content_loss
+        total_loss = (style_weight * style_loss) + (content_weight * content_loss)
 
-    return  (total_loss)
+        return (total_loss)
+    
+# ======================================== #

@@ -18,3 +18,4 @@ def gram_matrix(F):
     Gram = tf.matmul(F, F, transpose_a=True)
     Gram = normalize_matrix(Gram, F)
     return Gram
+
