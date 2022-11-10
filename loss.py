@@ -6,7 +6,7 @@
 #    By: ebennace <ebennace@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/10 09:09:12 by ebennace          #+#    #+#              #
-#    Updated: 2022/11/10 19:39:26 by ebennace         ###   ########.fr        #
+#    Updated: 2022/11/10 21:19:36 by ebennace         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,16 +16,16 @@ import tensorflow as tf
 from tensorflow import Tensor, Variable
 # ======================================== #
 
-def compute_content_loss(content_generated, 
-                         content_target):
+def compute_content_loss(content_generated : Tensor, 
+                         content_target : Tensor):
     
     content_loss = tf.reduce_mean((content_generated - content_target)**2)
     return (content_loss)
 
 # ======================================== #
 
-def compute_style_loss(style_generated, 
-                       style_target):
+def compute_style_loss(style_generated : Tensor, 
+                       style_target : Tensor):
 
     all_style_loss = list()
 
@@ -41,12 +41,12 @@ def compute_style_loss(style_generated,
 
 # ======================================== #
 
-def compute_total_loss(style_generated,
-                       content_generated,
-                       style_target,
-                       content_target,
-                       style_weight,
-                       content_weight):
+def compute_total_loss(style_generated : Tensor,
+                       content_generated : Tensor,
+                       style_target : Tensor,
+                       content_target : Tensor,
+                       style_weight : float,
+                       content_weight : float):
 
         content_loss = compute_content_loss(content_generated, content_target)
         style_loss = compute_style_loss(style_generated, style_target)

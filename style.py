@@ -6,16 +6,15 @@
 #    By: ebennace <ebennace@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/10 09:53:35 by ebennace          #+#    #+#              #
-#    Updated: 2022/11/10 19:54:35 by ebennace         ###   ########.fr        #
+#    Updated: 2022/11/10 21:23:24 by ebennace         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # =============== Import =================== #
 import tensorflow as tf
-import numpy as np
 
-from numpy import ndarray
 from tensorflow import Tensor
+from tensorflow import GradientTape 
 from keras import Model
 
 from tensorflow import Variable
@@ -28,15 +27,15 @@ from extract import extract_content, extract_style
 
 # ======================================== #
 @tf.function
-def update_style(model,
-                 style_target, 
-                 content_target, 
-                 generated_img,
-                 style_weight,
-                 content_weight, 
-                 optimizer):
+def update_style(model : Model,
+                 style_target : Tensor, 
+                 content_target : Tensor, 
+                 generated_img : Variable,
+                 style_weight : float,
+                 content_weight : float, 
+                 optimizer : Optimizer):
 
-    with tf.GradientTape() as tape :
+    with GradientTape() as tape :
 
         features_map = get_features_map(model, generated_img)
         style_generated = extract_style(features_map)

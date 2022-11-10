@@ -6,7 +6,7 @@
 #    By: ebennace <ebennace@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/10 09:05:10 by ebennace          #+#    #+#              #
-#    Updated: 2022/11/10 14:58:02 by ebennace         ###   ########.fr        #
+#    Updated: 2022/11/10 21:20:13 by ebennace         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ from tensorflow import Variable
 from image import clip_pixel
 # ======================================== #
 
-def gram_matrix(input_tensor):
+def gram_matrix(input_tensor : Tensor):
 
   Gram = tf.linalg.einsum('bijc,bijd->bcd', input_tensor, input_tensor)
   input_shape   = tf.shape(input_tensor)
@@ -32,10 +32,10 @@ def gram_matrix(input_tensor):
 
 # ======================================== #
 
-def compute_and_optimize_gradient(tape, 
-                                  optimizer, 
-                                  generated_img, 
-                                  loss):
+def compute_and_optimize_gradient(tape : GradientTape, 
+                                  optimizer : Optimizer, 
+                                  generated_img : Variable, 
+                                  loss : float):
 
     gradient = tape.gradient(loss, generated_img)
     optimizer.apply_gradients([(gradient, generated_img)])

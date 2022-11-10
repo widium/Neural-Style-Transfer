@@ -6,7 +6,7 @@
 #    By: ebennace <ebennace@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/10 08:56:25 by ebennace          #+#    #+#              #
-#    Updated: 2022/11/10 20:11:10 by ebennace         ###   ########.fr        #
+#    Updated: 2022/11/10 21:17:10 by ebennace         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ from tensorflow import Tensor
 from processing import preprocessing_img
 # ======================================== #
 
-def load_vgg19():
+def load_vgg19()-> Model:
     vgg = VGG19(include_top=False, weights='imagenet')
     return vgg
 
@@ -41,7 +41,7 @@ def create_list_of_vgg_layer():
 
 # ======================================== #
 
-def create_multi_output_model(style_layers, content_layers):
+def create_multi_output_model(style_layers : list, content_layers : list)-> Model:
 
     vgg19 = load_vgg19()
     
@@ -60,7 +60,7 @@ def create_multi_output_model(style_layers, content_layers):
 
 # ======================================== #
 
-def get_features_map(model, img):
+def get_features_map(model : Model, img : Tensor)->list:
 
         process_img = preprocessing_img(img)
         features_map = model(process_img)

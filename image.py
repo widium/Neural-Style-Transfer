@@ -6,7 +6,7 @@
 #    By: ebennace <ebennace@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/10 08:51:10 by ebennace          #+#    #+#              #
-#    Updated: 2022/11/10 14:58:48 by ebennace         ###   ########.fr        #
+#    Updated: 2022/11/10 21:00:20 by ebennace         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ from cv2 import COLOR_BGR2RGB
 from processing import Normalize_image, inverse_normalize_image, avoid_batch_dimensions
 # ======================================== #
   
-def load_image(path):
+def load_image(path : str):
     img = imread(path)
     img = cvtColor(img, COLOR_BGR2RGB)
     img = Normalize_image(img)
@@ -34,7 +34,7 @@ def load_image(path):
 
 # ======================================== #
 
-def tensor_to_image(tensor):
+def tensor_to_image(tensor : Tensor):
   tensor = inverse_normalize_image(tensor)
   array = np.array(tensor, dtype=np.uint8)
   array = avoid_batch_dimensions(array)
@@ -43,13 +43,13 @@ def tensor_to_image(tensor):
 
 # ======================================== #
 
-def clip_pixel(image):
+def clip_pixel(image : Tensor):
   cliped_imag = tf.clip_by_value(image, clip_value_min=0.0, clip_value_max=1.0)
   return (cliped_imag)
 
 # ======================================== #
 
-def create_noisy_imag(img, noise_ratio):
+def create_noisy_imag(img : Tensor, noise_ratio : float):
     
     noise_filter = np.random.randn(*img.shape)
     noise = noise_filter * noise_ratio
