@@ -6,20 +6,24 @@
 #    By: ebennace <ebennace@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 08:32:06 by ebennace          #+#    #+#              #
-#    Updated: 2022/11/15 15:29:07 by ebennace         ###   ########.fr        #
+#    Updated: 2022/11/15 16:32:20 by ebennace         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+from tensorflow import Tensor, Variable
 from PIL import Image
 
 from function.verbose import clear_output, display_convertion_style
+from function.verbose import display_representation
 from function.image import tensor_to_image
 
 # ======================================== #
 
-def add_frame(frames : list, generated_img):
-    imag = tensor_to_image(generated_img)
-    frames.append(imag)
+def add_frame(frames : list, generated_img, epoch : int):
+    
+    if (epoch % 50 == 0):
+        imag = tensor_to_image(generated_img)
+        frames.append(imag)
 
 # ======================================== #
 
@@ -41,3 +45,9 @@ def save_convertion(frames, content_img, style_img, generated_img):
     make_gif(frames)
     
 # ======================================== #
+
+def save_evolution(frames : list, img : Tensor, noise_img : Tensor, generated_img : Variable):
+    
+    clear_output(wait=True)
+    display_representation(img, noise_img, generated_img)
+    make_gif(frames)

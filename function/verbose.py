@@ -6,7 +6,7 @@
 #    By: ebennace <ebennace@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/10 09:00:04 by ebennace          #+#    #+#              #
-#    Updated: 2022/11/15 15:28:38 by ebennace         ###   ########.fr        #
+#    Updated: 2022/11/15 16:32:03 by ebennace         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,6 +75,28 @@ def display_convertion_style(content_img : Tensor, style_img : Tensor, generated
     ax[2].axis('off')
     
     fig.savefig('img/finish/subplot.png')
+    plt.show()
+
+# ======================================== #
+
+def display_representation(img : Tensor, noise_img : Tensor, generated_img : Variable):
+    # displaying content, style and generated style transferred images
+    fig, ax = plt.subplots(1, 3, figsize=(15,10))
+
+    ax[0].imshow(img)
+    ax[0].title.set_text('Image')
+    ax[0].axis('off')
+
+    ax[1].imshow(noise_img)
+    ax[1].title.set_text('Noise Image')
+    ax[1].axis('off')
+
+    generated_img = np.array(tensor_to_image(generated_img))
+    ax[2].imshow(generated_img)
+    ax[2].title.set_text('Generated Image')
+    ax[2].axis('off')
+    
+    fig.savefig(f'img/finish/representation.png')
     plt.show()
 
 # ======================================== #

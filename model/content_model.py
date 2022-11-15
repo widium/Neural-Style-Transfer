@@ -6,7 +6,7 @@
 #    By: ebennace <ebennace@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 13:15:39 by ebennace          #+#    #+#              #
-#    Updated: 2022/11/15 15:28:52 by ebennace         ###   ########.fr        #
+#    Updated: 2022/11/15 16:32:39 by ebennace         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,11 +20,11 @@ import matplotlib.pyplot as plt
 
 from time import time
 
+from function.image import get_picture_name
 from function.image import load_image
-from function.image import tensor_to_image
 
 from function.save import add_frame
-from function.save import save_convertion
+from function.save import save_evolution
 
 from .content_function import display_pictures
 from .content_function import display_generated_img
@@ -46,6 +46,7 @@ class Model_Content_Representation:
         self.model = create_model(self.content_layers)
         self.content_img = None
         self.generated_img = None
+        self.noise_img = None
         self.frames = list()
 
     # ===================================================== # 
@@ -53,12 +54,12 @@ class Model_Content_Representation:
     def import_img(self, content_img):
 
         self.content_img = load_image(content_img)
-        noise_img = init_noise_image(self.content_img)
-        display_pictures(self.content_img, noise_img)
+        self.noise_img = init_noise_image(self.content_img)
+        display_pictures(self.content_img, self.noise_img)
 
     # ===================================================== # 
     
-    def recreate_content(self, num_epochs,):
+    def recreate_content(self, num_epochs, create_gif=False):
 
         target_content = init_content_target(self.model, self.content_img)
         self.generated_img = init_generated_img(self.content_img)
@@ -71,7 +72,11 @@ class Model_Content_Representation:
                          self.generated_img, 
                          self.optimizer)
 
-            display_generated_img(self.generated_img) 
+            display_generated_img(self.generated_img)
+            if (create_gif == True):
+                add_frame(self.frames, self.generated_img, epoch)
              
         end = time()
         print("Total training time: {:.1f} seconds".format(end-start))
+        if (create_gif == True):
+            save_evolution(self.frames, self.content_img, self.noise_img, self.generated_img)

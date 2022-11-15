@@ -18,8 +18,10 @@ import matplotlib.pyplot as plt
 from time import time
 from tensorflow.keras.optimizers import Adam
 
+from function.image import get_picture_name
+
 from function.save import add_frame
-from function.save import save_convertion
+from function.save import save_evolution
 
 from function.image import load_image
 
@@ -39,17 +41,13 @@ class Model_Style_Representation:
     # =========================== # 
     def __init__(self, optimizer=Adam(learning_rate=0.02)):
         super().__init__()
-    
         self.optimizer = optimizer
-        
         self.style_layers = create_list_of_vgg_layer()
         self.num_style_layers  = len(self.style_layers)
-        
         self.model = create_multi_output_model(self.style_layers)
-        
         self.style_img = None
+        self.noise_img = None
         self.generated_img = None
-        
         self.frames = list()
 
     # ============================== # 
@@ -57,12 +55,12 @@ class Model_Style_Representation:
     def import_img(self, style_img):
 
         self.style_img = load_image(style_img)
-        noise_img = init_noise_image(self.style_img)
-        display_pictures(self.style_img, noise_img)
+        self.noise_img = init_noise_image(self.style_img)
+        display_pictures(self.style_img, self.noise_img)
 
     # ============================== # 
     
-    def recreate_style(self, num_epochs):
+    def recreate_style(self, num_epochs, create_gif=False):
 
         target_style = init_style_target(self.model, self.style_img)
         self.generated_img = init_generated_img(self.style_img)
@@ -76,9 +74,13 @@ class Model_Style_Representation:
                          self.optimizer)
 
             display_generated_img(self.generated_img)
+            
+            if (create_gif == True):
+                add_frame(self.frames, self.generated_img, epoch)
              
         end = time()
         print("Total training time: {:.1f} seconds".format(end-start))
-        return (self.generated_img)
+        if (create_gif == True):
+           save_evolution(self.frames, self.style_img, self.noise_img, self.generated_img)
 
 # ===================================================== # 

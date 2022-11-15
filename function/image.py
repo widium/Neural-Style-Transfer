@@ -6,7 +6,7 @@
 #    By: ebennace <ebennace@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/10 08:51:10 by ebennace          #+#    #+#              #
-#    Updated: 2022/11/15 15:29:16 by ebennace         ###   ########.fr        #
+#    Updated: 2022/11/15 16:03:23 by ebennace         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,16 @@ from function.processing import Normalize_image
 from function.processing import inverse_normalize_image
 from function.processing import avoid_batch_dimensions
 
+# ======================================== #
+
+def get_picture_name(filename : str):
+
+  ch = '.'
+  # Remove all characters after the character '-' from string
+  name = filename.split(ch, 1)
+  name = name[0]
+  return (name)
+  
 # ======================================== #
   
 def load_image(path : str):
