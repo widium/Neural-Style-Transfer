@@ -6,7 +6,7 @@
 #    By: ebennace <ebennace@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/10 09:00:04 by ebennace          #+#    #+#              #
-#    Updated: 2022/11/10 21:35:00 by ebennace         ###   ########.fr        #
+#    Updated: 2022/11/15 09:53:16 by ebennace         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,7 +73,8 @@ def display_convertion_style(content_img : Tensor, style_img : Tensor, generated
     ax[2].imshow(generated_img)
     ax[2].title.set_text('Generated Image')
     ax[2].axis('off')
-
+    
+    fig.savefig('img/finish/subplot.png')
     plt.show()
 
 # ======================================== #
@@ -89,3 +90,6 @@ def display_generated_img(generated_img : Variable,
     
     print(f"epoch : {epoch}")
     print(f'Progression : {epoch*100/num_epochs}%')
+    
+ # ======================================== #   
+    

@@ -6,7 +6,7 @@
 #    By: ebennace <ebennace@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/10 09:18:30 by ebennace          #+#    #+#              #
-#    Updated: 2022/11/10 21:01:47 by ebennace         ###   ########.fr        #
+#    Updated: 2022/11/15 09:43:02 by ebennace         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,13 @@ from keras import Model
 from Model import get_features_map
 from processing import create_batch_image
 from image import create_noisy_imag, clip_pixel
+from image import tensor_to_image
+from image import inverse_normalize_image
+from PIL import Image
+from verbose import display
 from extract import extract_content, extract_style
+
+from representation import plot_features_map
 # ======================================== #
 
 def init_content_target(model : Model, content_img : Tensor):
@@ -43,6 +49,8 @@ def init_style_target(model : Model, style_img : Tensor):
     style_target = extract_style(features_map)
 
     return (style_target)
+
+
 
 # ======================================== #
 

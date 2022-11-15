@@ -6,7 +6,7 @@
 #    By: ebennace <ebennace@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/10 08:51:10 by ebennace          #+#    #+#              #
-#    Updated: 2022/11/10 21:00:20 by ebennace         ###   ########.fr        #
+#    Updated: 2022/11/15 08:33:27 by ebennace         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,10 @@ from cv2 import cvtColor
 from cv2 import imread
 from cv2 import COLOR_BGR2RGB
 
-from processing import Normalize_image, inverse_normalize_image, avoid_batch_dimensions
+from processing import Normalize_image
+from processing import inverse_normalize_image
+from processing import avoid_batch_dimensions
+
 # ======================================== #
   
 def load_image(path : str):
@@ -56,4 +59,3 @@ def create_noisy_imag(img : Tensor, noise_ratio : float):
     noisy_img = img.copy() + noise
     return (noisy_img)
 
-# ======================================== #
