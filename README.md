@@ -209,7 +209,7 @@ def get_features_map(model : Model, img : Tensor)->list:
 - ### [Recreate Style Model Notebook](/notebook/recreate_style.ipynb)
 ***
 <p align="center">
-  <img src="https://i.imgur.com/xEDCVdB.gif">
+  <img src="https://i.imgur.com/4bhpmgo.gif">
 </p>
 
 - [1. Create Custom Model thats output "list of Features Maps"](#create-custom-model-thats-output-list-of-features-maps)
