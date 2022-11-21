@@ -6,7 +6,7 @@
 ![](https://i.imgur.com/CX1oilh.png)
 
 # ![](https://i.imgur.com/F2eZCTV.gif)
-# Features Maps :
+# Features Maps
 - [1. Import VGG19](#import-vgg19-model)
 - [2. Create List of Convolution Layers name](#create-list-of-convolution-layers-name)
 - [3. Create Model who output list of features map](#create-model-who-output-list-of-features-map)
@@ -15,9 +15,9 @@
 
 ![](https://i.imgur.com/oqaOEed.png)
 
-- ## Visualize feature extraction in a CNN:
+- ## Visualize feature extraction in a CNN
 
-- ### Import VGG19 Model :
+- ### Import VGG19 Model
 ~~~python
 def load_vgg19()-> Model:
     vgg = VGG19(include_top=False, weights='imagenet')
@@ -33,7 +33,7 @@ Trainable params: 143,667,240
 Non-trainable params: 0
 _________________________________________________________________
 ~~~
-- ### Create List of Convolution Layers name:
+- ### Create List of Convolution Layers name
 ~~~python
 def create_list_of_vgg_layer():
 
@@ -66,7 +66,7 @@ def create_multi_output_model(layer_name : list)-> Model:
 
     return (model)
 ~~~
-### Import and Preprocess image :
+### Import and Preprocess image
 - `Load image` - Keras
 - **Preprocess** array with with the specialize function of the VGG19 model
 - **Recover** the list of features maps 
@@ -78,7 +78,7 @@ input = preprocess_input(img)
 feature_maps = model.predict(input)
 ~~~
 
-### Plot one filter for each features Maps :
+### Plot one filter for each features Maps
 - **Define** the size of `Subplot`
 - **Iterate** in list of features mpas
 - **Plot** one filter in features map `Tensor` with `Imshow`
@@ -92,17 +92,16 @@ for f in feature_maps :
 ~~~
 ![](https://i.imgur.com/4Z0nRjH.png)
 
-# Cost Function :
+# Cost Function
 - [1. Content Cost Function](#content-cost-function)
 - [2. Style Cost Function](#style-cost-function)
 - [3. Total Cost Function]()
-# Content Cost Function :
+# Content Cost Function
 ![](https://i.imgur.com/TAuDx1e.gif)
 - [1. Create Custom Model to Generate One Features Map](#create-custom-model-to-generate-one-features-map)
 - [2. Compute Error With Features Maps](#compute-error-with-features-maps)
 - [3. Recreate Content with Features Maps](#recreate-content-with-features-maps)
 
-**Gif**
 
 ## Learn to Recreate Content
 - To recreate an image we will base it on the production of Features Map.
@@ -166,7 +165,7 @@ Trainable params: 0
 Non-trainable params: 260,160
 _________________________________________________________________
 ~~~
-## Get Features Maps Custom Model :
+## Get Features Maps Custom Model
 - **Preprocessing** img for Custom Model 
 - **Get** Output of Custom Model `features Maps`
 ~~~C
@@ -319,7 +318,6 @@ _________________________________________________________________
 - [2. Create Gram Style Matrix](#create-gram-style-matrix)
 - [3. Get Entire Style Of Image]()
 
-***GIF***
 ***
 ## Gram Matrix
 ### Matrix of Correlation between Vectors
@@ -452,7 +450,7 @@ def compute_style_loss(style_generated : Tensor,
 ![](https://i.imgur.com/21OPtvs.png)
 
 ## Recreate Content with Style
-### Compute Total loss for the generated image for each iteration :
+### Compute Total loss for the generated image for each iteration
 - **Extract** Style in `Generated Image`
 - **Extract** Content `Generated Image`
 - **Compute** Total loss With `Target Style` $\Large S$ and `Target Content` $\Large C$
@@ -460,7 +458,6 @@ def compute_style_loss(style_generated : Tensor,
 
 ![](https://i.imgur.com/w6fV6Eo.jpg)
 
-afsfa
 ![](https://i.imgur.com/Y56OC80.png)
 ![](https://i.imgur.com/QQB3c34.jpg)
 ![](https://i.imgur.com/C8jqqpe.jpg)
