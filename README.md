@@ -1,8 +1,9 @@
 # Neural-Style-Transfer
+- [Example of Convertion](/img/result/)
+- [Notebook](/notebook/README.md)
+## Understanding Project 
 - [1. Features Map](#features-maps)
 - [2. Cost Function](#cost-function)
-- [3. Model](#)
-- [Example of Convertion](/img/result/)
 ***
 # ![](https://i.imgur.com/F2eZCTV.gif)
 ![](https://i.imgur.com/CX1oilh.png)
@@ -97,8 +98,11 @@ for f in feature_maps :
 # Cost Function
 - [1. Content Cost Function](#content-cost-function)
 - [2. Style Cost Function](#style-cost-function)
-- [3. Total Cost Function]()
+- [3. Total Cost Function](#total-cost-function)
+
 # Content Cost Function
+- ### [Recreate Content Model Notebook](/notebook/recreate_content.ipynb)
+***
 ![](https://i.imgur.com/TAuDx1e.gif)
 - [1. Create Custom Model to Generate One Features Map](#create-custom-model-to-generate-one-features-map)
 - [2. Compute Error With Features Maps](#compute-error-with-features-maps)
@@ -202,6 +206,8 @@ def get_features_map(model : Model, img : Tensor)->list:
 
 
 # Style Cost Function 
+- ### [Recreate Style Model Notebook](/notebook/recreate_style.ipynb)
+***
 ![](https://i.imgur.com/xEDCVdB.gif)
 - [1. Create Custom Model thats output "list of Features Maps"](#create-custom-model-thats-output-list-of-features-maps)
 - [2. Extract Style](#extract-style)
@@ -440,8 +446,10 @@ def compute_style_loss(style_generated : Tensor,
 
 
 ## Total Cost Function
-- [1. Recreate Content with Style]()
-
+- ### [Style Transfert Model Notebook](/notebook/style_transfert.ipynb)
+![](https://i.imgur.com/F2eZCTV.gif)
+- [1. Recreate Content with Style](#recreate-content-with-style)
+***
 - **Extract** Content and Style for Generated Image and the Target Image 
 - **Compute** Total Loss With the Addition between Style Loss and Content Loss
 	- [Style Cost Function](#style-cost-function)

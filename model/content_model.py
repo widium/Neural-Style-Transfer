@@ -6,7 +6,7 @@
 #    By: ebennace <ebennace@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 13:15:39 by ebennace          #+#    #+#              #
-#    Updated: 2022/11/18 14:01:42 by ebennace         ###   ########.fr        #
+#    Updated: 2022/11/21 15:15:55 by ebennace         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ sys.path.append("..")
 
 from tensorflow.keras.optimizers import Adam
 
+from tqdm import tqdm
 
 import matplotlib.pyplot as plt 
 
@@ -39,7 +40,7 @@ from .content_function import update_content
 class Model_Content_Representation:
     
     # ===================================================== # 
-    def __init__(self, optimizer=Adam(learning_rate=0.02), style_weight=1e6, content_weight=5e0, noise_ratio=0.20):
+    def __init__(self, optimizer=Adam(learning_rate=0.02)):
         super().__init__()
         self.optimizer = optimizer
         self.content_layers = ['block4_conv4']
@@ -59,13 +60,13 @@ class Model_Content_Representation:
 
     # ===================================================== # 
     
-    def recreate_content(self, num_epochs, create_gif=False):
+    def recreate_content(self, num_epochs, create_gif=False, name : str = "content_representation"):
 
         target_content = init_content_target(self.model, self.content_img)
         self.generated_img = init_generated_img(self.content_img)
         
         start = time()
-        for epoch in range(num_epochs) :
+        for epoch in tqdm(range(num_epochs)) :
 
             update_content(self.model,
                          target_content, 
@@ -79,4 +80,6 @@ class Model_Content_Representation:
         end = time()
         print("Total training time: {:.1f} seconds".format(end-start))
         if (create_gif == True):
-            save_evolution(self.frames, self.content_img, self.noise_img, self.generated_img)
+            save_evolution(self.frames, self.content_img, self.noise_img, self.generated_img, name)
+            print(f"Gif saved in finish/{name}.gif")
+            print(f"Subplot saved in finish/{name}.png")

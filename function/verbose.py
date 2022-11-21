@@ -6,7 +6,7 @@
 #    By: ebennace <ebennace@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/10 09:00:04 by ebennace          #+#    #+#              #
-#    Updated: 2022/11/15 16:32:03 by ebennace         ###   ########.fr        #
+#    Updated: 2022/11/21 16:00:08 by ebennace         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,8 +57,8 @@ def display_pictures(content_img : Tensor, style_img : Tensor):
     
 # ======================================== #
     
-def display_convertion_style(content_img : Tensor, style_img : Tensor, generated_img : Variable):
-    # displaying content, style and generated style transferred images
+def display_convertion_style(content_img : Tensor, style_img : Tensor, generated_img : Variable, name : str):
+
     fig, ax = plt.subplots(1, 3, figsize=(15,10))
 
     ax[0].imshow(content_img)
@@ -74,13 +74,13 @@ def display_convertion_style(content_img : Tensor, style_img : Tensor, generated
     ax[2].title.set_text('Generated Image')
     ax[2].axis('off')
     
-    fig.savefig('img/finish/subplot.png')
+    fig.savefig(f'../img/finish/{name}.png')
     plt.show()
 
 # ======================================== #
 
-def display_representation(img : Tensor, noise_img : Tensor, generated_img : Variable):
-    # displaying content, style and generated style transferred images
+def display_representation(img : Tensor, noise_img : Tensor, generated_img : Variable, name : str):
+
     fig, ax = plt.subplots(1, 3, figsize=(15,10))
 
     ax[0].imshow(img)
@@ -96,7 +96,7 @@ def display_representation(img : Tensor, noise_img : Tensor, generated_img : Var
     ax[2].title.set_text('Generated Image')
     ax[2].axis('off')
     
-    fig.savefig(f'img/finish/representation.png')
+    fig.savefig(f'../img/finish/{name}.png')
     plt.show()
 
 # ======================================== #

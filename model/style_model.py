@@ -60,7 +60,7 @@ class Model_Style_Representation:
 
     # ============================== # 
     
-    def recreate_style(self, num_epochs, create_gif=False):
+    def recreate_style(self, num_epochs, create_gif=False, name : str = "style_representation"):
 
         target_style = init_style_target(self.model, self.style_img)
         self.generated_img = init_generated_img(self.style_img)
@@ -81,6 +81,6 @@ class Model_Style_Representation:
         end = time()
         print("Total training time: {:.1f} seconds".format(end-start))
         if (create_gif == True):
-           save_evolution(self.frames, self.style_img, self.noise_img, self.generated_img)
+           save_evolution(self.frames, self.style_img, self.noise_img, self.generated_img, name)
 
 # ===================================================== # 

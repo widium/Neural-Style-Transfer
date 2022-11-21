@@ -6,7 +6,7 @@
 #    By: ebennace <ebennace@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/16 06:02:53 by ebennace          #+#    #+#              #
-#    Updated: 2022/11/21 11:08:06 by ebennace         ###   ########.fr        #
+#    Updated: 2022/11/21 15:53:39 by ebennace         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ sys.path.append('..')
 # ******************************************************* #
 
 import tensorflow as tf
-
+from tqdm import tqdm
 from time import time
 from tensorflow.keras.optimizers import Adam
 
@@ -69,19 +69,19 @@ class Model_Style_Transfert:
 
     # ******************************************************* #
     
-    def transfert_style(self, num_epochs, create_gif=False):
+    def transfert_style(self, num_epochs, create_gif=False, name : str ="transfert"):
 
         target_style = init_style_target(self.model, self.style_img)
         target_content = init_content_target(self.model, self.content_img)
         self.generated_img = init_generated_img(self.content_img, self.noise_ratio)
             
         start = time()
-        for epoch in range(num_epochs) :
+        for epoch in tqdm(range(num_epochs)) :
 
             update_style(self.model,
                         target_style, 
                         target_content, 
-                        self.generated_img, 
+                        self.generated_img,
                         self.style_weight, 
                         self.content_weight,
                         self.optimizer)
@@ -93,4 +93,6 @@ class Model_Style_Transfert:
         end = time()
         print("Total training time: {:.1f} seconds".format(end-start))
         if (create_gif == True) :
-            save_convertion(self.frames, self.content_img, self.style_img, self.generated_img)
+            save_convertion(self.frames, self.content_img, self.style_img, self.generated_img, name)
+            print(f"Gif saved in finish/{name}.gif")
+            print(f"Subplot saved in finish/{name}.png")

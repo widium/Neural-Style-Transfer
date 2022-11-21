@@ -6,7 +6,7 @@
 #    By: ebennace <ebennace@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 08:32:06 by ebennace          #+#    #+#              #
-#    Updated: 2022/11/18 14:54:06 by ebennace         ###   ########.fr        #
+#    Updated: 2022/11/21 15:30:09 by ebennace         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,9 +30,9 @@ def add_frame(frames : list, generated_img, epoch : int):
 
 # ======================================== #
 
-def make_gif(frames : list):
+def make_gif(frames : list, name : str):
     frame_one = frames[0]
-    frame_one.save("img/finish/convert.gif", 
+    frame_one.save(f"../img/finish/{name}.gif", 
                    format="GIF", 
                    append_images=frames,
                    save_all=True, 
@@ -41,16 +41,16 @@ def make_gif(frames : list):
 
 # ======================================== #
 
-def save_convertion(frames, content_img, style_img, generated_img):
+def save_convertion(frames : list, content_img : Tensor, style_img : Tensor, generated_img : Variable, name : str):
     
     clear_output(wait=True)
-    display_convertion_style(content_img, style_img, generated_img)
-    make_gif(frames)
+    display_convertion_style(content_img, style_img, generated_img, name)
+    make_gif(frames, name)
     
 # ======================================== #
 
-def save_evolution(frames : list, img : Tensor, noise_img : Tensor, generated_img : Variable):
+def save_evolution(frames : list, img : Tensor, noise_img : Tensor, generated_img : Variable, name : str):
     
     clear_output(wait=True)
-    display_representation(img, noise_img, generated_img)
-    make_gif(frames)
+    display_representation(img, noise_img, generated_img, name)
+    make_gif(frames, name)
