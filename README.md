@@ -208,7 +208,7 @@ def get_features_map(model : Model, img : Tensor)->list:
 # Style Cost Function 
 - ### [Recreate Style Model Notebook](/notebook/recreate_style.ipynb)
 ***
-![](https://i.imgur.com/xEDCVdB.gif)
+## ![](https://i.imgur.com/xEDCVdB.gif)
 - [1. Create Custom Model thats output "list of Features Maps"](#create-custom-model-thats-output-list-of-features-maps)
 - [2. Extract Style](#extract-style)
 - [3. Compute Error Between 2 List of Gram Matrix](#compute-error-between-2-list-of-gram-matrix)
@@ -225,8 +225,8 @@ def get_features_map(model : Model, img : Tensor)->list:
 	- **Compare** with `Style Target `
 	- **Update** `Generated Image`
 
-## *$$G = \text{Gram Matrix of Generated Image}$$*
-## *$$S = \text{Gram Matrix of Style Image}$$*
+## $$G = \text{Gram Matrix of Generated Image}$$
+## $$S = \text{Gram Matrix of Style Image}$$
 ## $$\Large L_{\text{Style}}(G, S)=\frac{1}{2} \sum(G - S)^{2}$$
 ![](https://i.imgur.com/0GEgvGm.jpg)
 
