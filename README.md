@@ -210,7 +210,7 @@ def get_features_map(model : Model, img : Tensor)->list:
 
 
 <p align="center">
-  <img src="https://i.imgur.com/4bhpmgo.gif">
+  <img src="gif/style_evolution.gif">
 </p>
 
 - [1. Create Custom Model thats output "list of Features Maps"](#create-custom-model-thats-output-list-of-features-maps)
