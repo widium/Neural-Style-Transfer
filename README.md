@@ -2,10 +2,12 @@
 - [1. Features Map](#features-maps)
 - [2. Cost Function](#cost-function)
 - [3. Model](#)
-
+- [Example of Convertion](/img/result/)
+***
+# ![](https://i.imgur.com/F2eZCTV.gif)
 ![](https://i.imgur.com/CX1oilh.png)
 
-# ![](https://i.imgur.com/F2eZCTV.gif)
+***
 # Features Maps
 - [1. Import VGG19](#import-vgg19-model)
 - [2. Create List of Convolution Layers name](#create-list-of-convolution-layers-name)
@@ -457,10 +459,3 @@ def compute_style_loss(style_generated : Tensor,
 - **Minimize** the Error 
 
 ![](https://i.imgur.com/w6fV6Eo.jpg)
-
-![](https://i.imgur.com/Y56OC80.png)
-![](https://i.imgur.com/QQB3c34.jpg)
-![](https://i.imgur.com/C8jqqpe.jpg)
-![](https://i.imgur.com/15anmNa.jpg)
-
-![](https://i.imgur.com/ec6JCGY.png)
