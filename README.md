@@ -208,7 +208,10 @@ def get_features_map(model : Model, img : Tensor)->list:
 # Style Cost Function 
 - ### [Recreate Style Model Notebook](/notebook/recreate_style.ipynb)
 ***
-## ![](https://i.imgur.com/xEDCVdB.gif)
+<p align="center">
+  <img src="https://i.imgur.com/xEDCVdB.gif">
+</p>
+
 - [1. Create Custom Model thats output "list of Features Maps"](#create-custom-model-thats-output-list-of-features-maps)
 - [2. Extract Style](#extract-style)
 - [3. Compute Error Between 2 List of Gram Matrix](#compute-error-between-2-list-of-gram-matrix)
