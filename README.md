@@ -325,8 +325,9 @@ _________________________________________________________________
 ### Matrix of Correlation between Vectors
 - ### Dot Product with $\large n$ Vector
 
-## $$G(\{v_{1},\dots ,v_{n}\})={\begin{vmatrix}\langle v_{1},v_{1}\rangle &\langle v_{1},v_{2}\rangle &\dots &\langle v_{1},v_{n}\rangle \\\langle v_{2},v_{1}\rangle &\langle v_{2},v_{2}\rangle &\dots &\langle v_{2},v_{n}\rangle \\\vdots &\vdots &\ddots &\vdots \\\langle v_{n},v_{1}\rangle &\langle v_{n},v_{2}\rangle &\dots &\langle v_{n},v_{n}\rangle \end{vmatrix}}$$
-
+```math
+G(\{v_{1},\dots ,v_{n}\})={\begin{vmatrix}\langle v_{1},v_{1}\rangle &\langle v_{1},v_{2}\rangle &\dots &\langle v_{1},v_{n}\rangle \\\langle v_{2},v_{1}\rangle &\langle v_{2},v_{2}\rangle &\dots &\langle v_{2},v_{n}\rangle \\\vdots &\vdots &\ddots &\vdots \\\langle v_{n},v_{1}\rangle &\langle v_{n},v_{2}\rangle &\dots &\langle v_{n},v_{n}\rangle \end{vmatrix}}
+```
 
 ![](https://i.imgur.com/IGkOclV.png)
 
