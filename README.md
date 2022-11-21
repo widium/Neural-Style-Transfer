@@ -207,7 +207,8 @@ def get_features_map(model : Model, img : Tensor)->list:
 
 # Style Cost Function 
 - ### [Recreate Style Model Notebook](/notebook/recreate_style.ipynb)
-***
+
+
 <p align="center">
   <img src="https://i.imgur.com/4bhpmgo.gif">
 </p>
