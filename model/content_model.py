@@ -6,7 +6,7 @@
 #    By: ebennace <ebennace@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 13:15:39 by ebennace          #+#    #+#              #
-#    Updated: 2022/11/15 16:32:39 by ebennace         ###   ########.fr        #
+#    Updated: 2022/11/18 14:01:42 by ebennace         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ class Model_Content_Representation:
     def __init__(self, optimizer=Adam(learning_rate=0.02), style_weight=1e6, content_weight=5e0, noise_ratio=0.20):
         super().__init__()
         self.optimizer = optimizer
-        self.content_layers = ['block5_conv2']
+        self.content_layers = ['block4_conv4']
         self.model = create_model(self.content_layers)
         self.content_img = None
         self.generated_img = None

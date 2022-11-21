@@ -6,12 +6,13 @@
 #    By: ebennace <ebennace@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/10 09:53:35 by ebennace          #+#    #+#              #
-#    Updated: 2022/11/15 15:29:04 by ebennace         ###   ########.fr        #
+#    Updated: 2022/11/18 14:25:03 by ebennace         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # =============== Import =================== #
 import tensorflow as tf
+from datetime import datetime
 
 from tensorflow import Tensor
 from tensorflow import GradientTape 

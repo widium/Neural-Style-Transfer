@@ -6,7 +6,7 @@
 #    By: ebennace <ebennace@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/10 09:09:12 by ebennace          #+#    #+#              #
-#    Updated: 2022/11/10 21:19:36 by ebennace         ###   ########.fr        #
+#    Updated: 2022/11/18 14:24:52 by ebennace         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,6 @@ def compute_total_loss(style_generated : Tensor,
 
         content_loss = compute_content_loss(content_generated, content_target)
         style_loss = compute_style_loss(style_generated, style_target)
-
         total_loss = (style_weight * style_loss) + (content_weight * content_loss)
 
         return (total_loss)

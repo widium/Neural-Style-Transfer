@@ -6,7 +6,7 @@
 #    By: ebennace <ebennace@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/10 09:18:30 by ebennace          #+#    #+#              #
-#    Updated: 2022/11/15 15:29:16 by ebennace         ###   ########.fr        #
+#    Updated: 2022/11/18 14:18:29 by ebennace         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 import tensorflow as tf
 import numpy as np
 
-from numpy import ndarray
+
 from tensorflow import Tensor
 
 from tensorflow import Variable
@@ -23,13 +23,9 @@ from keras import Model
 from function.vgg import get_features_map
 from function.processing import create_batch_image
 from function.image import create_noisy_imag, clip_pixel
-from function.image import tensor_to_image
-from function.image import inverse_normalize_image
-from PIL import Image
-from function.verbose import display
+
 from function.extract import extract_content, extract_style
 
-from function.representation import plot_features_map
 # ======================================== #
 
 def init_content_target(model : Model, content_img : Tensor):
