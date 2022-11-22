@@ -8,13 +8,13 @@
     - [Recreate Style Notebook](notebook/recreate_style.ipynb)
 ***
 ## Understanding Project 
-- [1. Features Map](#features-maps)
+- ### <u>[1. Features Map](#features-maps)</u>
     - [1. Import VGG19](#import-vgg19-model)
     - [2. Create List of Convolution Layers name](#create-list-of-convolution-layers-name)
     - [3. Create Model who output list of features map](#create-model-who-output-list-of-features-map)
     - [4 . Import and Preprocess Imag](#import-and-preprocess-image)
     - [5. Plot one filter for each features Maps](#plot-one-filter-for-each-features-maps)
-- [2. Cost Function](#cost-function)
+- ### <u>[2. Cost Function](#cost-function)</u>
     - [1. Content Cost Function](#content-cost-function)
         - [1. Create Custom Model to Generate One Features Map](#create-custom-model-to-generate-one-features-map)
         - [2. Compute Error With Features Maps](#compute-error-with-features-maps)
