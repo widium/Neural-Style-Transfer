@@ -9,6 +9,6 @@
 <p align="center">
     <img src="https://i.imgur.com/F2eZCTV.gif">
     <img src="https://i.imgur.com/TAuDx1e.gif">
-    <img src="../gif/style_evolution.gif">
+    <img src="https://i.imgur.com/1hpX2Ju.gif">
 </p>
 
