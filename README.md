@@ -5,8 +5,10 @@
 - [1. Features Map](#features-maps)
 - [2. Cost Function](#cost-function)
 ***
-# ![](https://i.imgur.com/F2eZCTV.gif)
-![](https://i.imgur.com/CX1oilh.png)
+<p align="center">
+    <img src="https://i.imgur.com/F2eZCTV.gif">
+    <img src="https://i.imgur.com/CX1oilh.png">
+<p>
 
 ***
 # Features Maps
@@ -103,7 +105,10 @@ for f in feature_maps :
 # Content Cost Function
 - ### [Recreate Content Model Notebook](/notebook/recreate_content.ipynb)
 ***
-![](https://i.imgur.com/TAuDx1e.gif)
+<p align="center">
+    <img src="https://i.imgur.com/TAuDx1e.gif">
+<p>
+
 - [1. Create Custom Model to Generate One Features Map](#create-custom-model-to-generate-one-features-map)
 - [2. Compute Error With Features Maps](#compute-error-with-features-maps)
 - [3. Recreate Content with Features Maps](#recreate-content-with-features-maps)
@@ -229,9 +234,9 @@ def get_features_map(model : Model, img : Tensor)->list:
 	- **Compare** with `Style Target `
 	- **Update** `Generated Image`
 
-## $$G = \text{Gram Matrix of Generated Image}$$
-## $$S = \text{Gram Matrix of Style Image}$$
-## $$\Large L_{\text{Style}}(G, S)=\frac{1}{2} \sum(G - S)^{2}$$
+### $$G = \text{Gram Matrix of Generated Image}$$
+### $$S = \text{Gram Matrix of Style Image}$$
+## $$L_{\text{Style}}(G, S)=\frac{1}{2} \sum(G - S)^{2}$$
 ![](https://i.imgur.com/0GEgvGm.jpg)
 
 ***
@@ -451,7 +456,11 @@ def compute_style_loss(style_generated : Tensor,
 
 ## Total Cost Function
 - ### [Style Transfert Model Notebook](/notebook/style_transfert.ipynb)
-![](https://i.imgur.com/F2eZCTV.gif)
+
+<p align="center">
+    <img src="https://i.imgur.com/F2eZCTV.gif">
+<p>
+
 - [1. Recreate Content with Style](#recreate-content-with-style)
 ***
 - **Extract** Content and Style for Generated Image and the Target Image 
