@@ -1,20 +1,20 @@
 # Neural-Style-Transfer
 ## Example and Notebook
-- [Example of Convertion](/img/result/README.md)
-- [Notebook](/notebook/README.md)
+- ### [Example of Convertion](/img/result/README.md)
+- ### [Notebook](/notebook/README.md)
     - [Features Maps Notebook](notebook/feature_map.ipynb)
     - [Neural Style Transfert Notebook](notebook/style_transfert.ipynb)
     - [Recreate Content Notebook](notebook/recreate_content.ipynb)
     - [Recreate Style Notebook](notebook/recreate_style.ipynb)
 ***
 ## Understanding Project 
-- ### <u>[1. Features Map](#features-maps)</u>
+- ### [1. Features Map](#features-maps)
     - [1. Import VGG19](#import-vgg19-model)
     - [2. Create List of Convolution Layers name](#create-list-of-convolution-layers-name)
     - [3. Create Model who output list of features map](#create-model-who-output-list-of-features-map)
     - [4 . Import and Preprocess Imag](#import-and-preprocess-image)
     - [5. Plot one filter for each features Maps](#plot-one-filter-for-each-features-maps)
-- ### <u>[2. Cost Function](#cost-function)</u>
+- ### [2. Cost Function](#cost-function)
     - ### [1. Content Cost Function](#content-cost-function)
         - [1. Create Custom Model to Generate One Features Map](#create-custom-model-to-generate-one-features-map)
         - [2. Compute Error With Features Maps](#compute-error-with-features-maps)
