@@ -15,11 +15,11 @@
     - [4 . Import and Preprocess Imag](#import-and-preprocess-image)
     - [5. Plot one filter for each features Maps](#plot-one-filter-for-each-features-maps)
 - ### <u>[2. Cost Function](#cost-function)</u>
-    - [1. Content Cost Function](#content-cost-function)
+    - ### [1. Content Cost Function](#content-cost-function)
         - [1. Create Custom Model to Generate One Features Map](#create-custom-model-to-generate-one-features-map)
         - [2. Compute Error With Features Maps](#compute-error-with-features-maps)
         - [3. Recreate Content with Features Maps](#recreate-content-with-features-maps)
-    - [2. Style Cost Function](#style-cost-function)
+    - ### [2. Style Cost Function](#style-cost-function)
         - [1. Create Custom Model thats output "list of Features Maps"](#create-custom-model-thats-output-list-of-features-maps)
         - [2. Extract Style](#extract-style)
             - [(Optional) Gram Matrix](#gram-matrix)
@@ -28,7 +28,7 @@
             - [3. Get Entire Style Of Image]()
         - [3. Compute Error Between 2 List of Gram Matrix](#compute-error-between-2-list-of-gram-matrix)
         - [4. Recreate Style](#recreate-style)
-    - [3. Total Cost Function](#total-cost-function)
+    - ### [3. Total Cost Function](#total-cost-function)
         - [1. Recreate Content with Style](#recreate-content-with-style)
 ***
 <p align="center">
