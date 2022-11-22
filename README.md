@@ -1,10 +1,11 @@
 # Neural-Style-Transfer
 ## Example and Notebook
-- [Example of Convertion](/img/result/)
+- [Example of Convertion](/img/result/README.md)
 - [Notebook](/notebook/README.md)
-    - [Neural Style Transfert Notebook](style_transfert.ipynb)
-    - [Recreate Content Notebook](recreate_content.ipynb)
-    - [Recreate Style Notebook](recreate_style.ipynb)
+    - [Features Maps Notebook](notebook/feature_map.ipynb)
+    - [Neural Style Transfert Notebook](notebook/style_transfert.ipynb)
+    - [Recreate Content Notebook](notebook/recreate_content.ipynb)
+    - [Recreate Style Notebook](notebook/recreate_style.ipynb)
 ***
 ## Understanding Project 
 - [1. Features Map](#features-maps)
@@ -37,6 +38,7 @@
 
 ***
 # Features Maps
+- ## [Features Maps Notebook](notebook/feature_map.ipynb)
 - [1. Import VGG19](#import-vgg19-model)
 - [2. Create List of Convolution Layers name](#create-list-of-convolution-layers-name)
 - [3. Create Model who output list of features map](#create-model-who-output-list-of-features-map)
@@ -128,7 +130,7 @@ for f in feature_maps :
 - [3. Total Cost Function](#total-cost-function)
 
 # Content Cost Function
-- ### [Recreate Content Model Notebook](/notebook/recreate_content.ipynb)
+- ### [Recreate Content Model Notebook](notebook/recreate_content.ipynb)
 ***
 <p align="center">
     <img src="https://i.imgur.com/TAuDx1e.gif">
@@ -236,7 +238,7 @@ def get_features_map(model : Model, img : Tensor)->list:
 
 
 # Style Cost Function 
-- ### [Recreate Style Model Notebook](/notebook/recreate_style.ipynb)
+- ### [Recreate Style Model Notebook](notebook/recreate_style.ipynb)
 
 
 <p align="center">
