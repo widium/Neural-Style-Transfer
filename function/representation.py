@@ -6,7 +6,7 @@
 #    By: ebennace <ebennace@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/15 09:31:43 by ebennace          #+#    #+#              #
-#    Updated: 2022/11/16 05:58:26 by ebennace         ###   ########.fr        #
+#    Updated: 2022/11/23 06:52:39 by ebennace         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ from function.processing import inverse_normalize_image
 
 # =================================================== # 
     
-def plot_features_map(features_map):
+def plot_features_maps(features_map):
     # plot the output from each block
     height = 2
     width = 2
@@ -41,7 +41,7 @@ def plot_features_map(features_map):
 
 # =================================================== # 
       
-def plot_features_map_style(features_map : list):
+def plot_features_maps_style(features_map : list):
     
     style_outputs  = get_styles_in_features_map(features_map)
     nbr = len(style_outputs)

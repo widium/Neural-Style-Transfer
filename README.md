@@ -2,31 +2,31 @@
 ## Example and Notebook
 - ### [Example of Convertion](/img/result/README.md)
 - ### [Notebook](/notebook/README.md)
-    - [Features Maps Notebook](notebook/feature_map.ipynb)
+    - [Feature maps Notebook](notebook/feature_map.ipynb)
     - [Neural Style Transfert Notebook](notebook/style_transfert.ipynb)
     - [Recreate Content Notebook](notebook/recreate_content.ipynb)
     - [Recreate Style Notebook](notebook/recreate_style.ipynb)
 ***
 ## Understanding Project 
-- ### [1. Features Map](#features-maps)
+- ### [1. Feature maps](#feature-maps)
     - [1. Import VGG19](#import-vgg19-model)
-    - [2. Create List of Convolution Layers name](#create-list-of-convolution-layers-name)
-    - [3. Create Model who output list of features map](#create-model-who-output-list-of-features-map)
-    - [4 . Import and Preprocess Imag](#import-and-preprocess-image)
-    - [5. Plot one filter for each features Maps](#plot-one-filter-for-each-features-maps)
-- ### [2. Cost Function](#cost-function)
+    - [2. Create List of Convolution Layer names](#create-list-of-convolution-layers-name)
+    - [3. Create Model who outputs list of Feature maps](#create-model-who-outputs-list-of-feature-maps)
+    - [4 . Import and Preprocess Image](#import-and-preprocess-image)
+    - [5. Plot one filter for each Feature map](#plot-one-filter-for-each-feature-maps)
+- ### [2. Cost Functions](#cost-functions)
     - ### [1. Content Cost Function](#content-cost-function)
-        - [1. Create Custom Model to Generate One Features Map](#create-custom-model-to-generate-one-features-map)
-        - [2. Compute Error With Features Maps](#compute-error-with-features-maps)
-        - [3. Recreate Content with Features Maps](#recreate-content-with-features-maps)
+        - [1. Create Custom Model to Generate One Feature map](#create-custom-model-to-generate-one-feature-map)
+        - [2. Compute Error With Feature maps](#compute-error-with-feature-maps)
+        - [3. Recreate Content with Feature maps](#recreate-content-with-feature-maps)
     - ### [2. Style Cost Function](#style-cost-function)
-        - [1. Create Custom Model thats output "list of Features Maps"](#create-custom-model-thats-output-list-of-features-maps)
+        - [1. Create Custom Model that outputs "list of Feature maps"](#create-custom-model-that-outputs-list-of-feature-maps)
         - [2. Extract Style](#extract-style)
             - [(Optional) Gram Matrix](#gram-matrix)
-            - [1. Filter Map to Matrix of Pixel](#filter-map-to-matrix-of-pixel)
+            - [1. Filter Map to Matrix of Pixels](#filter-map-to-matrix-of-pixels)
             - [2. Create Gram Style Matrix](#create-gram-style-matrix)
-            - [3. Get Entire Style Of Image]()
-        - [3. Compute Error Between 2 List of Gram Matrix](#compute-error-between-2-list-of-gram-matrix)
+            - [3. Get Entire Style Of Image](#get-entire-style-of-image)
+        - [3. Compute Error Between 2 Lists of Gram Matrix](#compute-error-between-2-lists-of-gram-matrix)
         - [4. Recreate Style](#recreate-style)
     - ### [3. Total Cost Function](#total-cost-function)
         - [1. Recreate Content with Style](#recreate-content-with-style)
@@ -37,13 +37,13 @@
 <p>
 
 ***
-# Features Maps
-- ## [Features Maps Notebook](notebook/feature_map.ipynb)
+# Feature maps
+- ## [Feature maps Notebook](notebook/feature_map.ipynb)
 - [1. Import VGG19](#import-vgg19-model)
 - [2. Create List of Convolution Layers name](#create-list-of-convolution-layers-name)
-- [3. Create Model who output list of features map](#create-model-who-output-list-of-features-map)
+- [3. Create Model who output list of Feature maps](#create-model-who-output-list-of-features-map)
 - [4 . Import and Preprocess Imag](#import-and-preprocess-image)
-- [5. Plot one filter for each features Maps](#plot-one-filter-for-each-features-maps)
+- [5. Plot one filter for each Feature maps](#plot-one-filter-for-each-feature-maps)
 
 ![](https://i.imgur.com/oqaOEed.png)
 
@@ -77,11 +77,11 @@ def create_list_of_vgg_layer():
 
     return (layers_name)
 ~~~
-### Create Model who output list of features map
+### Create Model who outputs list of Feature maps
 - **iterate** in list of layers name 
 - **get** output shape of each layer in vgg19
 - **append** in list of outputs
-- **define** the New Model with a list of features map as output
+- **define** the New Model with a list of Feature maps as output
 ~~~python
 def create_multi_output_model(layer_name : list)-> Model:
 
@@ -101,7 +101,7 @@ def create_multi_output_model(layer_name : list)-> Model:
 ### Import and Preprocess image
 - `Load image` - Keras
 - **Preprocess** array with with the specialize function of the VGG19 model
-- **Recover** the list of features maps 
+- **Recover** the list of Feature maps 
 ~~~python
 img = load_img('waves.jpg')  
 img = img_to_array(img)  
@@ -110,10 +110,10 @@ input = preprocess_input(img)
 feature_maps = model.predict(input)
 ~~~
 
-### Plot one filter for each features Maps
+### Plot one filter for each Feature map
 - **Define** the size of `Subplot`
-- **Iterate** in list of features mpas
-- **Plot** one filter in features map `Tensor` with `Imshow`
+- **Iterate** in list of feature maps
+- **Plot** one filter in Feature maps `Tensor` with `Imshow`
 ~~~python
 fig, ax = plt.subplots(1, 5, figsize=(20, 15))
 
@@ -124,7 +124,7 @@ for f in feature_maps :
 ~~~
 ![](https://i.imgur.com/4Z0nRjH.png)
 
-# Cost Function
+# Cost Functions
 - [1. Content Cost Function](#content-cost-function)
 - [2. Style Cost Function](#style-cost-function)
 - [3. Total Cost Function](#total-cost-function)
@@ -136,25 +136,25 @@ for f in feature_maps :
     <img src="https://i.imgur.com/TAuDx1e.gif">
 <p>
 
-- [1. Create Custom Model to Generate One Features Map](#create-custom-model-to-generate-one-features-map)
-- [2. Compute Error With Features Maps](#compute-error-with-features-maps)
-- [3. Recreate Content with Features Maps](#recreate-content-with-features-maps)
+- [1. Create Custom Model to Generate One Feature maps](#create-custom-model-to-generate-one-features-map)
+- [2. Compute Error With Feature maps](#compute-error-with-feature-maps)
+- [3. Recreate Content with Feature maps](#recreate-content-with-feature-maps)
 
 
 ## Learn to Recreate Content
-- To recreate an image we will base it on the production of Features Map.
+- To recreate an image we will base it on the production of Feature maps.
 - We pass 2 image in the model :
 	- *One with random pixels  $\large G$*
 	- *One with a content $\large C$*
 - We get the output of one convolution of the model and we compare **The value of the Pixel in all Filter for the 2 images by** :
-	- calculating **the difference between the 2 Tensor of Features Map $F$ and $P$**
+	- calculating **the difference between the 2 Tensor of Feature maps $F$ and $P$**
 
 $$\Large L_\text {content}(G, C)=\frac{1}{2} \sum(G - C)^{2}$$
 
 ![](https://i.imgur.com/nGlKPq6.jpg)
-## Create Custom Model to Generate One Features Map
+## Create Custom Model to Generate One Feature map
 ![](https://i.imgur.com/6dLki5Y.png)
-- From the VGG19 Network we recreate a Model that outputs 1 feature maps of a given image
+- From the VGG19 Network we recreate a Model that outputs 1 Feature maps of a given image
 - **Load** the VGG Network without the Fully Connected Layer (FC) and without the Output Layer
 - **Define** the output of the New Model as a Convolution Layer
 - **Set** the Un-trainaible parameters
@@ -203,9 +203,9 @@ Trainable params: 0
 Non-trainable params: 260,160
 _________________________________________________________________
 ~~~
-## Get Features Maps Custom Model
+## Get Feature maps Custom Model
 - **Preprocessing** img for Custom Model 
-- **Get** Output of Custom Model `features Maps`
+- **Get** Output of Custom Model `Feature maps`
 ~~~C
 def get_features_map(model : Model, img : Tensor)->list:
 
@@ -215,9 +215,9 @@ def get_features_map(model : Model, img : Tensor)->list:
     return (features_map)
 ~~~
 
-## Compute Error With Features Maps
-- For the Model can compare 2 images we give it feature maps
-- We can calculate **the pixel difference between the 2 feature maps** with a Square Error MSE
+## Compute Error With Feature maps
+- For the Model can compare 2 images we give it Feature maps
+- We can calculate **the pixel difference between the 2 Feature maps** with a Square Error MSE
 
 ~~~python
  def compute_content_loss(content_generated : Tensor, content_target : Tensor):
@@ -228,9 +228,9 @@ def get_features_map(model : Model, img : Tensor)->list:
 
 ![](https://i.imgur.com/uCpB9Ih.png)
 
-## Recreate Content with Features Maps
+## Recreate Content with Feature maps
 **For each Iteration :**
-- **Extract** Content Features Maps
+- **Extract** Content Feature maps
 - **Compute** Error with `Target Content`
 - **Update** `Generated Image`
 
@@ -245,14 +245,14 @@ def get_features_map(model : Model, img : Tensor)->list:
   <img src="https://i.imgur.com/1hpX2Ju.gif">
 </p>
 
-- [1. Create Custom Model thats output "list of Features Maps"](#create-custom-model-thats-output-list-of-features-maps)
+- [1. Create Custom Model thats output "list of Feature maps"](#create-custom-model-thats-output-list-of-feature-maps)
 - [2. Extract Style](#extract-style)
 - [3. Compute Error Between 2 List of Gram Matrix](#compute-error-between-2-list-of-gram-matrix)
 - [4. Recreate Style](#recreate-style)
 
 ## *Learn to Recreate Style* 
-- To recreate Style we need to have **multiple features map for one image** 
-- **Compute the Correlation Between Filter** of all Features maps for understand the paterns in style (*List of Gram Matrix*)
+- To recreate Style we need to have **multiple Feature maps for one image** 
+- **Compute the Correlation Between Filter** of all Feature maps for understand the paterns in style (*List of Gram Matrix*)
 - **Initialise** Image with Random PIxel `Generated Image`
 - **Set** the `Target Style` with the *List of Gram Matrix* of `Style Image`
 - **Compute** the Difference of **2** *list of Gram Matrix* (`Style Image` and` Generated Image`)
@@ -267,7 +267,7 @@ def get_features_map(model : Model, img : Tensor)->list:
 ![](https://i.imgur.com/0GEgvGm.jpg)
 
 ***
-## Create Custom Model thats output "list of Features Maps"
+## Create Custom Model that outputs "list of Feature maps"
 ![](https://i.imgur.com/gg7tHqC.png)
 
 ### Create List of Convolution Layer Output
@@ -300,7 +300,7 @@ def load_vgg19()-> Model:
 -   **iterate** in list of layers name
 -   **get** output shape of each layer in vgg19
 -   **append** in list of outputs
--   **define** the New Model with a list of features map as output
+-   **define** the New Model with a list of Feature maps as output
 
 ```python
 def create_multi_output_model(layer_name : list)-> Model:
@@ -381,8 +381,8 @@ def gram_matrix(F):
     return Gram
 ~~~
 ***
-## Filter Map to Matrix of Pixel
-- **Flatten** each **Filter** in Features maps to **Vector of Pixel** 
+## Filter Map to Matrix of Pixels
+- **Flatten** each **Filter** in Feature maps to **Vector of Pixel** 
 - **Create** Matrix with `N` **Vector of Pixel** 
 
 ~~~python
@@ -428,7 +428,7 @@ def normalize_matrix(G, Filters):
 
 ## Get Entire Style Of Image
 
-- **Get** List of Features maps 
+- **Get** List of Feature maps 
 - **Convert** each Filters to Vector of Pixel
 - **Compute** Gram Matrix for Each Feature Map
 - **Save** List of Gram Matrix 
@@ -446,9 +446,9 @@ def extract_style(features_map):
 ~~~
 ![](https://i.imgur.com/32vSl4E.png)
 
-## Compute Error Between 2 List of Gram Matrix
-- **Get** List of Features Maps for Style Image and Generated Image
-- **Compute** Gram Style Matrix for Each Features Maps for the 2 Image
+## Compute Error Between 2 Lists of Gram Matrix
+- **Get** List of Feature maps for Style Image and Generated Image
+- **Compute** Gram Style Matrix for Each Feature maps for the 2 Image
 - **Calculate** the difference between the 2 Gram Matrix lists
 
 ~~~python
@@ -471,8 +471,8 @@ def compute_style_loss(style_generated : Tensor,
 
 ## Recreate Style 
 **For** each iteration
-- **Get** List of Features Maps of `Generated Image`
-- **Compute** The Gram Style Matrix for each Features Maps
+- **Get** List of Feature maps of `Generated Image`
+- **Compute** The Gram Style Matrix for each Feature maps
 - **Compute** Loss With :
 	- *Gram Style Matrix of Generated Image*
 	- *Gram Style Matrix of Style Image (Target)*
