@@ -2,18 +2,18 @@
 ## Example and Notebook
 - ### [Example of Convertion](/img/result/README.md)
 - ### [Notebook](/notebook/README.md)
-    - [Feature maps Notebook](notebook/feature_map.ipynb)
+    - [Feature map Notebook](notebook/feature_map.ipynb)
     - [Neural Style Transfert Notebook](notebook/style_transfert.ipynb)
     - [Recreate Content Notebook](notebook/recreate_content.ipynb)
     - [Recreate Style Notebook](notebook/recreate_style.ipynb)
 ***
-## Understanding Project 
+## Understanding The Project 
 - ### [1. Feature maps](#feature-maps)
     - [1. Import VGG19](#import-vgg19-model)
-    - [2. Create List of Convolution Layer names](#create-list-of-convolution-layers-name)
+    - [2. Create List of Convolution Layer names](#create-list-of-convolution-layer-names)
     - [3. Create Model who outputs list of Feature maps](#create-model-who-outputs-list-of-feature-maps)
     - [4 . Import and Preprocess Image](#import-and-preprocess-image)
-    - [5. Plot one filter for each Feature map](#plot-one-filter-for-each-feature-maps)
+    - [5. Plot one filter for each Feature map](#plot-one-filter-for-each-feature-map)
 - ### [2. Cost Functions](#cost-functions)
     - ### [1. Content Cost Function](#content-cost-function)
         - [1. Create Custom Model to Generate One Feature map](#create-custom-model-to-generate-one-feature-map)
@@ -40,14 +40,14 @@
 # Feature maps
 - ## [Feature maps Notebook](notebook/feature_map.ipynb)
 - [1. Import VGG19](#import-vgg19-model)
-- [2. Create List of Convolution Layers name](#create-list-of-convolution-layers-name)
-- [3. Create Model who output list of Feature maps](#create-model-who-output-list-of-features-map)
-- [4 . Import and Preprocess Imag](#import-and-preprocess-image)
-- [5. Plot one filter for each Feature maps](#plot-one-filter-for-each-feature-maps)
+- [2. Create List of Convolution Layer names](#create-list-of-convolution-layer-names)
+- [3. Create Model who outputs list of Feature maps](#create-model-who-outputs-list-of-feature-maps)
+- [4 . Import and Preprocess Image](#import-and-preprocess-image)
+- [5. Plot one filter for each Feature map](#plot-one-filter-for-each-feature-map)
 
 ![](https://i.imgur.com/oqaOEed.png)
 
-- ## Visualize feature extraction in a CNN
+- ## Visualize features extraction in a CNN
 
 - ### Import VGG19 Model
 ~~~python
@@ -65,7 +65,7 @@ Trainable params: 143,667,240
 Non-trainable params: 0
 _________________________________________________________________
 ~~~
-- ### Create List of Convolution Layers name
+- ### Create List of Convolution Layer names
 ~~~python
 def create_list_of_vgg_layer():
 
@@ -100,7 +100,7 @@ def create_multi_output_model(layer_name : list)-> Model:
 ~~~
 ### Import and Preprocess image
 - `Load image` - Keras
-- **Preprocess** array with with the specialize function of the VGG19 model
+- **Preprocess** array with the special function of the VGG19 model
 - **Recover** the list of Feature maps 
 ~~~python
 img = load_img('waves.jpg')  
@@ -112,7 +112,7 @@ feature_maps = model.predict(input)
 
 ### Plot one filter for each Feature map
 - **Define** the size of `Subplot`
-- **Iterate** in list of feature maps
+- **Iterate** in list of Feature maps
 - **Plot** one filter in Feature maps `Tensor` with `Imshow`
 ~~~python
 fig, ax = plt.subplots(1, 5, figsize=(20, 15))
@@ -136,7 +136,7 @@ for f in feature_maps :
     <img src="https://i.imgur.com/TAuDx1e.gif">
 <p>
 
-- [1. Create Custom Model to Generate One Feature maps](#create-custom-model-to-generate-one-features-map)
+- [1. Create Custom Model to Generate One Feature map](#create-custom-model-to-generate-one-feature-map)
 - [2. Compute Error With Feature maps](#compute-error-with-feature-maps)
 - [3. Recreate Content with Feature maps](#recreate-content-with-feature-maps)
 
@@ -204,8 +204,8 @@ Non-trainable params: 260,160
 _________________________________________________________________
 ~~~
 ## Get Feature maps Custom Model
-- **Preprocessing** img for Custom Model 
-- **Get** Output of Custom Model `Feature maps`
+- **Preprocessing** image for Custom Model 
+- **Get** Output of Custom Model -> `Feature maps`
 ~~~C
 def get_features_map(model : Model, img : Tensor)->list:
 
@@ -245,9 +245,9 @@ def get_features_map(model : Model, img : Tensor)->list:
   <img src="https://i.imgur.com/1hpX2Ju.gif">
 </p>
 
-- [1. Create Custom Model thats output "list of Feature maps"](#create-custom-model-thats-output-list-of-feature-maps)
+- [1. Create Custom Model that outputs "list of Feature maps"](#create-custom-model-that-outputs-list-of-feature-maps)
 - [2. Extract Style](#extract-style)
-- [3. Compute Error Between 2 List of Gram Matrix](#compute-error-between-2-list-of-gram-matrix)
+- [3. Compute Error Between 2 Lists of Gram Matrix](#compute-error-between-2-lists-of-gram-matrix)
 - [4. Recreate Style](#recreate-style)
 
 ## *Learn to Recreate Style* 
@@ -322,30 +322,9 @@ def create_multi_output_model(layer_name : list)-> Model:
 ~~~python
 model = create_multi_output_model(layers_name)
 model.summary()
-_________________________________________________________________
- Layer (type)                Output Shape              Param #   
+
+>>>
 =================================================================
- input_2 (InputLayer)        [(None, None, None, 3)]   0         
-                                                                 
- block1_conv1 (Conv2D)       (None, None, None, 64)    1792      
-                                                                 
- block1_conv2 (Conv2D)       (None, None, None, 64)    36928     
-                                                                 
- block1_pool (MaxPooling2D)  (None, None, None, 64)    0         
-                                                                 
- block2_conv1 (Conv2D)       (None, None, None, 128)   73856     
-                                                                 
- block2_conv2 (Conv2D)       (None, None, None, 128)   147584    
-                                                                 
- block2_pool (MaxPooling2D)  (None, None, None, 128)   0         
-                                                                 
- block3_conv1 (Conv2D)       (None, None, None, 256)   295168    
-                                                                 
- block3_conv2 (Conv2D)       (None, None, None, 256)   590080    
-                                                                 
- block3_conv3 (Conv2D)       (None, None, None, 256)   590080    
-                                                                 
- block3_conv4 (Conv2D)       (None, None, None, 256)   590080    
 ...
 Total params: 12,944,960
 Trainable params: 0
@@ -358,9 +337,9 @@ _________________________________________________________________
 
 ## Extract Style 
 - [(Optional) Gram Matrix](#gram-matrix)
-- [1. Filter Map to Matrix of Pixel](#filter-map-to-matrix-of-pixel)
+- [1. Filter Map to Matrix of Pixels](#filter-map-to-matrix-of-pixels)
 - [2. Create Gram Style Matrix](#create-gram-style-matrix)
-- [3. Get Entire Style Of Image]()
+- [3. Get Entire Style Of Image](#get-entire-style-of-image)
 
 ***
 ## Gram Matrix
@@ -493,7 +472,7 @@ def compute_style_loss(style_generated : Tensor,
 - **Extract** Content and Style for Generated Image and the Target Image 
 - **Compute** Total Loss With the Addition between Style Loss and Content Loss
 	- [Style Cost Function](#style-cost-function)
-	- [Content Cost Function](#content-cost-function)
+	- [Cost Functions](#cost-functions)
 - **Weighting** each Loss to prioritize the style or the content
 ### $$\LARGE L_{\text {Total}}=\theta . L_{\text {Content}}+\beta . L_{\text {Style}}$$
 
