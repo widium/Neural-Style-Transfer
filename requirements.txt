@@ -1,7 +1,7 @@
-tensorflow == 2.7.0
+tensorflow == 2.11.0
 gradio == 3.16.1
-matplotlib == 3.5.2
-protobuf == 3.20.0
-tqdm == 4.64.0
-opencv-python == 4.6.0.66
-ipython == 8.8.0
+matplotlib == 3.7.1
+protobuf == 3.19.6
+tqdm == 4.65.0
+opencv-python == 4.7.0.72
+ipython == 8.13.2

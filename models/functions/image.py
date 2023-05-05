@@ -22,7 +22,7 @@ from cv2 import COLOR_BGR2RGB
 
 from .processing import Normalize_image
 from .processing import inverse_normalize_image
-from .processing import avoid_batch_dimensions
+from .processing import remove_batch_dimension
 
 # ======================================== #
 
@@ -35,7 +35,18 @@ def get_picture_name(filename : str):
   return (name)
   
 # ======================================== #
+
+def load_img_buffer(buffer):
   
+  img_pil = Image.open(buffer)
+  img_array = np.array(img_pil)
+  img = cvtColor(img_array, COLOR_BGR2RGB)
+  img = Normalize_image(img)
+  
+  return (img)
+
+# ======================================== #
+
 def load_image(path : str):
     img = imread(path)
     img = cvtColor(img, COLOR_BGR2RGB)
@@ -48,7 +59,7 @@ def load_image(path : str):
 def tensor_to_image(tensor : Tensor):
   tensor = inverse_normalize_image(tensor)
   array = np.array(tensor, dtype=np.uint8)
-  array = avoid_batch_dimensions(array)
+  array = remove_batch_dimension(array)
   img = Image.fromarray(array)
   return img
 

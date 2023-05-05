@@ -37,7 +37,7 @@ from .functions.style import update_style
 
 # ******************************************************* #
 
-class Model_Style_Transfert:
+class NeuralStyleTransfertModel:
 
     # ******************************************************* #
     def __init__(self, optimizer=Adam(learning_rate=0.02), style_weight=1e6, content_weight=5e0, noise_ratio=0.20):

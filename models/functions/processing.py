@@ -1,16 +1,14 @@
-# **************************************************************************** #
+# *************************************************************************** #
 #                                                                              #
-#                                                         :::      ::::::::    #
-#    processing.py                                      :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: ebennace <ebennace@student.42lausanne.c    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/11/10 09:10:40 by ebennace          #+#    #+#              #
-#    Updated: 2022/11/10 21:31:21 by ebennace         ###   ########.fr        #
+#    processing.py                                                             #
 #                                                                              #
-# **************************************************************************** #
-
-# =============== Import =================== #
+#    By: Widium <ebennace@student.42lausanne.ch>                               #
+#    Github : https://github.com/widium                                        #
+#                                                                              #
+#    Created: 2022/11/10 09:10:04 by  ebennace                                 #
+#    Updated: 2023/05/04 11:37:55 by Widium                                    #
+#                                                                              #
+# **************************************************************************** ## =============== Import =================== #
 import tensorflow as tf
 import numpy as np
 
@@ -26,7 +24,7 @@ def create_batch_image(img : Tensor):
 
 # ======================================== #
 
-def avoid_batch_dimensions(array : ndarray):
+def remove_batch_dimension(array : ndarray):
     
     array = np.reshape(array, (array.shape[1], array.shape[2], array.shape[3]))
     return (array)

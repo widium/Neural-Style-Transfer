@@ -1,52 +1,60 @@
-# **************************************************************************** #
+# *************************************************************************** #
 #                                                                              #
-#                                                         :::      ::::::::    #
-#    app.py                                             :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: ebennace <ebennace@student.42lausanne.c    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/12/01 14:12:13 by ebennace          #+#    #+#              #
-#    Updated: 2022/12/06 18:32:11 by ebennace         ###   ########.fr        #
+#    streamlit_app.py                                                          #
+#                                                                              #
+#    By: Widium <ebennace@student.42lausanne.ch>                               #
+#    Github : https://github.com/widium                                        #
+#                                                                              #
+#    Created: 2022/12/01 14:12:01 by  ebennace                                 #
+#    Updated: 2023/05/04 10:40:43 by Widium                                    #
 #                                                                              #
 # **************************************************************************** #
 
-import sys
-sys.path.append("..")
-
-import pandas as pd 
-import numpy as np
+import tensorflow as tf
+import streamlit as st 
 
 from PIL import Image
 
-import streamlit as st 
-import matplotlib.pyplot as plt
+from models.neural_style_transfert import NeuralStyleTransfertModel
+from models.functions.image import load_img_buffer, load_image
+from models.functions.image import tensor_to_image
 
-from time import sleep
-
-from backend.model.neural_style_transfert import Model_Style_Transfert
-from backend.function.image import load_image
-from backend.function.image import tensor_to_image
+# **************************************************************************** #
 
 st.set_page_config("Neural Style Transfert", "🎨")
-
 st.header("Neural Style Transfert 🧠 🎨")
 
-Model = Model_Style_Transfert()
+print("GPU AVAILABLE ?", tf.config.list_physical_devices('GPU'))
+model = NeuralStyleTransfertModel()
+
+# **************************************************************************** #
 
 col1, col2 = st.columns(2)
 
-content_buffer = col1.file_uploader("**Upload Base Image :**")
-style_buffer = col2.file_uploader("**Upload Style Image :**")
+# content_buffer = col1.file_uploader(label="**Upload Base Image :**")
+# style_buffer = col2.file_uploader(label="**Upload Style Image :**")
 
-if style_buffer != None and content_buffer != None:
-    Model.import_img(content_buffer, style_buffer)
-    col1.write(f"Shape : {Model.content_img.shape}")
-    col2.write(f"Shape : {Model.style_img.shape}")
-    col1.image(content_buffer)
-    col2.image(style_buffer)
-    Model.transfert_style(num_epochs=5)
-    final = tensor_to_image(Model.generated_img)
-    st.image(final, width=600)
+# if style_buffer != None and content_buffer != None:
+    
+# model.content_img = load_img_buffer(content_buffer)
+# model.style_img = load_img_buffer(style_buffer)
+
+model.content_img = load_image("img/examples/content/content_img.jpg")
+model.style_img = load_image("img/examples/style/vangogh_night.jpg")
+
+col1.write(f"Shape : {model.content_img.shape}")
+col2.write(f"Shape : {model.style_img.shape}")
+
+col1.image(Image.open("img/examples/content/content_img.jpg"))
+col2.image(Image.open("img/examples/style/vangogh_night.jpg"))
+
+model.transfert_style(
+    num_epochs=300
+)
+
+final = tensor_to_image(model.generated_img)
+
+st.image(final, width=600)
     
 
 
