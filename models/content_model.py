@@ -34,7 +34,7 @@ from .content_function import update_content
 
 # ===================================================== # 
 
-class Model_Content_Representation:
+class ImageRecreationModel:
     
     # ===================================================== # 
     def __init__(self, optimizer=Adam(learning_rate=0.02)):

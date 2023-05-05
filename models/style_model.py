@@ -33,7 +33,7 @@ from .style_function import display_pictures
 
 # ===================================================== # 
 
-class Model_Style_Representation:
+class StyleRecreationModel:
 
     # =========================== # 
     def __init__(self, optimizer=Adam(learning_rate=0.02)):
